@@ -27,15 +27,18 @@ class PostPRReminder(Action):
         channel = reminder_message.data["channel"]
         thread_ts = reminder_message.data["ts"]
         for pr in prs:
-            sys.stdout.write(f"{type(pr)} length {len(pr)}")
-            message = f"{pr['user']['login']},{pr['html_url']}\n"
-            response = self.client.chat_postMessage(
-                channel=channel,
-                text=message,
-                unfurl_links=False,
-                thread_ts=thread_ts,
-            )
-            assert response["ok"]
+            if len(pr) != 36:
+                sys.stdout.write(str(pr))
+                pass
+            else:
+                message = f"{pr['user']['login']},{pr['html_url']}\n"
+                response = self.client.chat_postMessage(
+                    channel=channel,
+                    text=message,
+                    unfurl_links=False,
+                    thread_ts=thread_ts,
+                )
+                assert response["ok"]
 
     def post_reminder(self):
         reminder = self.client.chat_postMessage(
