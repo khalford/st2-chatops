@@ -23,19 +23,20 @@ class PostPRReminder(Action):
         self.iter_prs(prs, reminder_message)
 
 
-    def iter_prs(self, prs: List[str], reminder_message) -> None:
+    def iter_prs(self, repo_prs: List[str], reminder_message) -> None:
         channel = reminder_message.data["channel"]
         thread_ts = reminder_message.data["ts"]
-        for pr in prs:
-            sys.stdout.write(f"{type(pr)} length {len(pr)}")
-            message = f"{pr['user']['login']},{pr['html_url']}\n"
-            response = self.client.chat_postMessage(
-                channel=channel,
-                text=message,
-                unfurl_links=False,
-                thread_ts=thread_ts,
-            )
-            assert response["ok"]
+        for prs in repo_prs:
+            for pr in prs:
+                sys.stdout.write(f"{type(pr)} length {len(pr)}")
+                message = f"{pr['user']['login']},{pr['html_url']}\n"
+                response = self.client.chat_postMessage(
+                    channel=channel,
+                    text=message,
+                    unfurl_links=False,
+                    thread_ts=thread_ts,
+                )
+                assert response["ok"]
 
     def post_reminder(self):
         reminder = self.client.chat_postMessage(
