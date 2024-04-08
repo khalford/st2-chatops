@@ -6,6 +6,10 @@ from st2common.runners.base_action import Action
 from slack_sdk import WebClient
 from get_messages import GetMessages
 
+with open("/etc/slack_ids.json", "r") as file:
+    data = file.read()
+    usernames = json.loads(data)
+
 
 class PostPRReminder(Action):
 
@@ -30,7 +34,11 @@ class PostPRReminder(Action):
             if len(pr) != 36:
                 pass
             else:
-                message = f"{pr['user']['login']},{pr['html_url']}\n"
+                if pr['user']['login'] in usernames:
+                    user = usernames[pr['user']['login']]
+                else:
+                    user = pr['user']['login']
+                message = f"<@{user}>:{pr['html_url']}\n"
                 response = self.client.chat_postMessage(
                     channel=channel,
                     text=message,
