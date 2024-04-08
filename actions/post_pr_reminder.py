@@ -24,6 +24,7 @@ class PostPRReminder(Action):
 
 
     def iter_prs(self, prs: List[str], reminder_message) -> None:
+        sys.stdout.write(str(reminder_message.data))
         channel = reminder_message.data["message"]["channel"]
         thread_ts = reminder_message.data["message"]["ts"]
         for pr in prs:
