@@ -9,7 +9,8 @@ from get_messages import GetMessages
 
 class PostPRReminder(Action):
 
-    def __init__(self):
+    def __init__(self, config=None):
+        super().__init__(config)
         self.get_messages = GetMessages()
         self.client = WebClient(token=self.get_messages.secrets["SLACK_TOKEN"])
 
