@@ -4,9 +4,7 @@ from st2reactor.sensor.base import Sensor
 
 class PostPRReminder(Sensor):
     def __init__(self, sensor_service, config):
-        super(PostPRReminder, self).__init__(
-            sensor_service=sensor_service, config=config
-        )
+        super().__init__(sensor_service=sensor_service, config=config)
         self._logger = self.sensor_service.get_logger(name=self.__class__.__name__)
         self._stop = False
 
@@ -27,7 +25,6 @@ class PostPRReminder(Sensor):
     def cleanup(self):
         self._stop = True
 
-    # Methods required for programmable sensors.
     def add_trigger(self, trigger):
         pass
 

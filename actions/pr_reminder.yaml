@@ -1,7 +1,7 @@
 ---
-name: "post_pr_reminder"
+name: "pr_reminder"
 pack: st2_cloud_chatops
 runner_type: "python-script"
 description: "Posts open Github pull requests in Cloud owned repositories to Slack every day."
 enabled: true
-entry_point: "post_pr_reminder.py"
+entry_point: "pr_reminder.py"

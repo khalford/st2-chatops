@@ -1,10 +1,9 @@
 ---
 ref: st2_cloud_chatops
 name: Cloud ChatOps
-description: This pack contains sensors, rules and actions for Cloud ChatOps.
+description: This pack actions for STFC Cloud ChatOps.
 keywords:
     - chatops
-# Pack version which must follow semver format (<major>.<minor>.<patch> e.g. 1.0.0)
 version: 1.0.0
 python_versions:
   - "3"

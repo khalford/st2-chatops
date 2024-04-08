@@ -1,5 +1,5 @@
 ---
-    name: on_post_pr_reminder_event
+    name: on_pr_reminder_event
     pack: st2_cloud_chatops
     description: "PR reminder rule triggering pr event."
     enabled: true
@@ -8,4 +8,4 @@
         type: st2_cloud_chatops.reminder_event
 
     action:
-        ref: st2_cloud_chatops.post_pr_reminder
+        ref: st2_cloud_chatops.pr_reminder
