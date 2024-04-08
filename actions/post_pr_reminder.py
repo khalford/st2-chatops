@@ -20,7 +20,7 @@ class GetMessages:
         return repos
 
     @staticmethod
-    def get_secrets() -> Dict[str:str]:
+    def get_secrets() -> Dict[str,str]:
         with open("/etc/st2_tokens.json", "r") as file:
             data = file.read()
             secrets = json.loads(data)
