@@ -7,15 +7,15 @@ from slack_sdk import WebClient
 from get_messages import GetMessages
 
 
-class PostPRReminder(Action, GetMessages):
+class PostPRReminder(Action):
 
     def __init__(self):
-        super().__init__()
-        self.client = WebClient(token=self.secrets["SLACK_TOKEN"])
+        self.get_messages = GetMessages()
+        self.client = WebClient(token=self.get_messages.secrets["SLACK_TOKEN"])
 
     def run(self, channel: str) -> None:
-        prs = self.get_raw_prs()
-        self.post_to_slack(self.secrets["SLACK_TOKEN"], prs, channel)
+        prs = self.get_messages.get_raw_prs()
+        self.post_to_slack(self.get_messages.secrets["SLACK_TOKEN"], prs, channel)
 
     def post_to_slack(self, token: str, prs: List[str], channel: str):
         reminder_message = self.post_reminder(channel)
@@ -43,16 +43,16 @@ class PostPRReminder(Action, GetMessages):
         return reminder
 
 
-    def send_messages(self, prs: List[str]):
-        for pr in prs:
-            message = f"{pr['user']['login']},{pr['html_url']}\n"
-            response = client.chat_postMessage(
-                channel=self.channel,
-                text=message,
-                unfurl_links=False,
-                thread_ts=reminder.data["message"]["ts"],
-            )
-            assert response["ok"]
+    # def send_messages(self, prs: List[str]):
+    #     for pr in prs:
+    #         message = f"{pr['user']['login']},{pr['html_url']}\n"
+    #         response = client.chat_postMessage(
+    #             channel=self.channel,
+    #             text=message,
+    #             unfurl_links=False,
+    #             thread_ts=reminder.data["message"]["ts"],
+    #         )
+    #         assert response["ok"]
 
 
 if __name__ == '__main__':
