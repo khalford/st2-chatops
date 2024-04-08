@@ -33,5 +33,10 @@ class GetMessages:
         for repo in self.repos:
             url = f"https://api.github.com/repos/stfc/{repo}/pulls"
             response = self.get_http_response_github(url)
-            responses.append(response)
+
+            if type(response) is list:
+                for pr in response:
+                    responses.append(pr)
+            elif type(response) is dict:
+                responses.append(response)
         return responses
