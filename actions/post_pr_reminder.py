@@ -9,14 +9,15 @@ from get_messages import GetMessages
 
 class PostPRReminder(Action):
 
-    def __init__(self, config=None):
+    def __init__(self, channel, config=None):
         super().__init__(config)
         self.get_messages = GetMessages()
         self.client = WebClient(token=self.get_messages.secrets["SLACK_TOKEN"])
+        self.channel = channel
 
-    def run(self, channel: str) -> None:
+    def run(self) -> None:
         prs = self.get_messages.get_raw_prs()
-        self.post_to_slack(self.get_messages.secrets["SLACK_TOKEN"], prs, channel)
+        self.post_to_slack(self.get_messages.secrets["SLACK_TOKEN"], prs, self.channel)
 
     def post_to_slack(self, token: str, prs: List[str], channel: str):
         reminder_message = self.post_reminder(channel)

@@ -6,8 +6,8 @@ description: "Posts open Github pull requests in Cloud owned repositories to Sla
 enabled: true
 entry_point: "post_pr_reminder.py"
 parameters:
-    chanel:
+    channel:
         type: "string"
-        description: "the chanel to post in"
+        description: "the channel to post in"
         required: true
         position: 0
