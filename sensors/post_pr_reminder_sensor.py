@@ -19,7 +19,7 @@ class PostPRReminder(Sensor):
             count = self.sensor_service.get_value("st2_cloud_chatops.count") or 0
             payload = {"channel": "chatops", "count": int(count) + 1}
             self.sensor_service.dispatch(
-                trigger="st2_cloud_chatops.post_pr_reminder_event", payload=payload
+                trigger="st2_cloud_chatops.reminder_event", payload=payload
             )
             self.sensor_service.set_value("st2_cloud_chatops.count", payload["count"])
             eventlet.sleep(30)
