@@ -13,7 +13,7 @@ class GetMessages:
     def get_repos() -> List[str]:
         with open("/etc/repos.csv", "r") as file:
             data = file.read()
-            repos = data.split(".")
+            repos = data.split(",")
         return repos
 
     @staticmethod
