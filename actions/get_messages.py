@@ -2,6 +2,7 @@ import requests
 from typing import List, Dict
 import json
 
+import sys
 class GetMessages:
 
     def __init__(self):
@@ -30,6 +31,7 @@ class GetMessages:
     def get_raw_prs(self) -> List[List[Dict]]:
         responses = []
         for repo in self.repos:
+            sys.stdout.write(str(repo))
             url = f"https://api.github.com/repos/stfc/{repo}/pulls"
             response = self.get_http_response_github(url)
             responses.append(response)
