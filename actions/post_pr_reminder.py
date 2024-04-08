@@ -28,7 +28,6 @@ class PostPRReminder(Action):
         thread_ts = reminder_message.data["ts"]
         for pr in prs:
             if len(pr) != 36:
-                sys.stdout.write(str(pr))
                 pass
             else:
                 message = f"{pr['user']['login']},{pr['html_url']}\n"
