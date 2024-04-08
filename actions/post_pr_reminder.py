@@ -27,7 +27,8 @@ class PostPRReminder(Action):
         channel = reminder_message.data["channel"]
         thread_ts = reminder_message.data["ts"]
         for pr in prs:
-            message = f"{pr['user']['login']},{['html_url']}\n"
+            sys.stdout.write(f"{type(pr)} length {len(pr)}")
+            message = f"{pr['user']['login']},{pr['html_url']}\n"
             response = self.client.chat_postMessage(
                 channel=channel,
                 text=message,
