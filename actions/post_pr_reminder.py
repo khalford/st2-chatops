@@ -9,18 +9,17 @@ from get_messages import GetMessages
 
 class PostPRReminder(Action):
 
-    def __init__(self, channel, config=None):
+    def __init__(self, config=None):
         super().__init__(config)
         self.get_messages = GetMessages()
         self.client = WebClient(token=self.get_messages.secrets["SLACK_TOKEN"])
-        self.channel = channel
 
     def run(self) -> None:
         prs = self.get_messages.get_raw_prs()
-        self.post_to_slack(self.get_messages.secrets["SLACK_TOKEN"], prs, self.channel)
+        self.post_to_slack(self.get_messages.secrets["SLACK_TOKEN"], prs)
 
-    def post_to_slack(self, token: str, prs: List[str], channel: str):
-        reminder_message = self.post_reminder(channel)
+    def post_to_slack(self, token: str, prs: List[str]):
+        reminder_message = self.post_reminder()
         self.iter_prs(prs, reminder_message)
 
 
@@ -37,9 +36,9 @@ class PostPRReminder(Action):
             )
             assert response["ok"]
 
-    def post_reminder(self, channel: str):
+    def post_reminder(self):
         reminder = self.client.chat_postMessage(
-            channel=channel,
+            channel="pull-requests",
             text="Here are the outstanding PRs as of today :",
         )
         return reminder
