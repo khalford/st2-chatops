@@ -1,5 +1,5 @@
 ---
-class_name: "PostPRReminder"
+class_name: "PRReminder"
 entry_point: "pr_reminder_sensor.py"
 description: "PR reminder sensor to trigger the action."
 trigger_types:

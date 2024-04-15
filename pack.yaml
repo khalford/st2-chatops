@@ -1,7 +1,7 @@
 ---
 ref: st2_cloud_chatops
 name: Cloud ChatOps
-description: This pack actions for STFC Cloud ChatOps.
+description: This pack contains actions for STFC Cloud ChatOps.
 keywords:
     - chatops
 version: 1.0.0
